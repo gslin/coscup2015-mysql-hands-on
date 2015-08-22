@@ -1,0 +1,2 @@
+#
+db-drbd-1 MailTo::me+drbdfailover@gmail.com::HeartbeatFailover_db-drbd-float drbddisk::r0 Filesystem::/dev/drbd0::/srv::ext4::noatime,nodiratime mysql 192.168.50.103

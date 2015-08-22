@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# This script is inteded to be used as resource script by heartbeat
+#
+# Mar 2006 by Monty Taylor
+#
+###
+
+. /etc/ha.d/shellfuncs
+
+case "$1" in
+    start)
+        res=`/etc/init.d/mysql start`
+        ret=$?
+        ha_log $res
+        exit $ret
+        ;;
+    stop)
+        res=`/etc/init.d/mysql stop`
+        ret=$?
+        ha_log $res
+        exit $ret
+        ;;
+    status)
+        if [[ `ps -ef | grep '[m]ysqld'` > 1 ]] ; then
+           echo "running"
+        else
+           echo "stopped"
+        fi
+        ;;
+    *)
+        echo "Usage: mysql {start|stop|status}"
+        exit 1
+        ;;
+esac
+
+exit 0

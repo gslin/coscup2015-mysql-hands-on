@@ -1,0 +1,11 @@
+#
+logfile /var/log/ha.log
+keepalive 2
+deadtime 10
+warntime 5
+initdead 20
+udpport 694
+auto_failback off
+ucast eth1 192.168.50.102
+node db-drbd-1
+node db-drbd-2
