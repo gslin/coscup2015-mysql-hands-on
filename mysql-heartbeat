@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# 沒有 my.cnf 的時候就不要檢查
+if [ ! -r /etc/mysql/my.cnf ]; then
+    exit
+fi
+
+# 沒有 heartbeat 的時候就不要檢查
+if [ ! -r /etc/ha.d/ha.cf ]; then
+    exit
+fi
+
+CL="$(/usr/bin/cl_status rscstatus 2>&1)"
+
+# DRBD 中只需要處理當 Heartbeat 確定拿到資源，但 mysql 沒起來的 case
+
+if /sbin/ifconfig -s | /usr/bin/awk '{print $1}' | /bin/grep : > /dev/null 2>&1; then
+    if ! /bin/ps -U mysql | /bin/grep mysqld > /dev/null 2>&1; then
+        /usr/share/heartbeat/hb_standby > /dev/null 2>&1
+    fi
+fi
