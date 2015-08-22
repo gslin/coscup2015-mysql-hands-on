@@ -5,10 +5,10 @@ resource r0 {
 
     on db-drbd-1 {
         disk /dev/sda3;
-        address 192.168.50.1:7789;
+        address 192.168.50.101:7789;
     }
     on db-drbd-2 {
         disk /dev/sda3;
-        address 192.168.50.2:7789;
+        address 192.168.50.102:7789;
     }
 }
